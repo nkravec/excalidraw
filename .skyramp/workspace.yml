@@ -1,0 +1,23 @@
+# Skyramp Workspace Configuration
+workspace:
+  repoName: nkravec/excalidraw
+  repoUrl: https://github.com/nkravec/excalidraw
+metadata:
+  schemaVersion: v1
+  mcpVersion: 0.2.0-rc.1
+  executorVersion: v1.3.24
+  createdAt: "2026-05-19T19:57:40.970Z"
+  updatedAt: "2026-05-19T19:57:40.977Z"
+services:
+  - serviceName: excalidraw-app
+    language: typescript
+    framework: playwright
+    testDirectory: tests/skyramp
+    api:
+      authType: none
+      authHeader: ""
+      baseUrl: http://localhost:3000
+    runtimeDetails:
+      serverStartCommand: docker compose -f docker-compose.eval.yml up -d excalidraw
+      runtime: docker
+      dockerNetwork: excalidraw_default
