@@ -1,0 +1,19 @@
+# docker-compose.eval.yml — production-build compose for Skyramp Testbot runs.
+#
+# Differs from the upstream docker-compose.yml (dev server with hot reload)
+# in that it builds the production bundle via Dockerfile.eval and serves it
+# from nginx. Faster startup and closer to what end users see.
+
+services:
+  excalidraw:
+    build:
+      context: .
+      dockerfile: Dockerfile.eval
+    ports:
+      - "3000:80"
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 18
+      start_period: 120s
