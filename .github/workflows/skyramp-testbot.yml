@@ -38,10 +38,26 @@ jobs:
           fetch-depth: 0
           token: ${{ steps.skyramp-testbot-app-token.outputs.token }}
 
-      - uses: skyramp/testbot@0601948440f6d88a0292dcada04feadb18824a68 # v0.10.0
+      - uses: skyramp/testbot@next
         with:
           skyrampLicenseFile: ${{ secrets.SKYRAMP_LICENSE_FILE }}
           anthropicApiKey: ${{ secrets.SKYRAMP_TESTBOT_API_KEY }}
           githubToken: ${{ steps.skyramp-testbot-app-token.outputs.token }}
           testRepo: 'nkravec/excalidraw-tests'
-          testRepoToken: ${{ steps.app-token.outputs.token }}
+          testRepoToken: ${{ steps.skyramp-testbot-app-token.outputs.token }}
+
+          # Build the production bundle (nginx-served) instead of the heavy
+          # dev-server image. --build bakes per-PR changes into the image so
+          # testbot doesn't reuse stale layers across runs.
+          targetSetupCommand: 'docker compose -f docker-compose.eval.yml up -d --build'
+
+          # Excalidraw's first build is slow; give it room before the readiness
+          # check times out.
+          targetReadyCheckTimeout: '180'
+
+          # Pin the MCP version that ships the DOM Analyzer + URL-cache work.
+          skyrampMcpVersion: '0.2.0-rc.1'
+
+          # Conservative limits for first runs; bump later if cost is fine.
+          maxRecommendations: '10'
+          maxGenerate: '2'
