@@ -5,7 +5,7 @@ import { useUIAppState } from "../../context/ui-appState";
 import { t, useI18n } from "../../i18n";
 import { useEditorInterface, useExcalidrawActionManager } from "../App";
 import { ExcalidrawLogo } from "../ExcalidrawLogo";
-import { HelpIcon, LoadIcon, usersIcon } from "../icons";
+import { GithubIcon, HelpIcon, LoadIcon, usersIcon } from "../icons";
 
 import type { JSX } from "react";
 
@@ -100,6 +100,7 @@ const Center = ({ children }: { children?: React.ReactNode }) => {
             <Menu>
               <MenuItemLoadScene />
               <MenuItemHelp />
+              <MenuItemGitHubLink />
             </Menu>
           </>
         )}
@@ -182,6 +183,19 @@ const MenuItemLiveCollaborationTrigger = ({
 MenuItemLiveCollaborationTrigger.displayName =
   "MenuItemLiveCollaborationTrigger";
 
+const MenuItemGitHubLink = () => {
+  return (
+    <WelcomeScreenMenuItemLink
+      href="https://github.com/excalidraw/excalidraw"
+      shortcut={null}
+      icon={GithubIcon}
+    >
+      Star us on GitHub
+    </WelcomeScreenMenuItemLink>
+  );
+};
+MenuItemGitHubLink.displayName = "MenuItemGitHubLink";
+
 // -----------------------------------------------------------------------------
 
 Center.Logo = Logo;
@@ -192,5 +206,6 @@ Center.MenuItemLink = WelcomeScreenMenuItemLink;
 Center.MenuItemHelp = MenuItemHelp;
 Center.MenuItemLoadScene = MenuItemLoadScene;
 Center.MenuItemLiveCollaborationTrigger = MenuItemLiveCollaborationTrigger;
+Center.MenuItemGitHubLink = MenuItemGitHubLink;
 
 export { Center };
