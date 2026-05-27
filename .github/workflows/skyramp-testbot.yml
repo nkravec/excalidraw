@@ -38,7 +38,7 @@ jobs:
           fetch-depth: 0
           token: ${{ steps.skyramp-testbot-app-token.outputs.token }}
 
-      - uses: skyramp/testbot@next
+      - uses: skyramp/testbot@v0.10.1
         with:
           skyrampLicenseFile: ${{ secrets.SKYRAMP_LICENSE_FILE }}
           anthropicApiKey: ${{ secrets.SKYRAMP_TESTBOT_API_KEY }}
@@ -56,7 +56,7 @@ jobs:
           targetReadyCheckTimeout: '180'
 
           # Pin the MCP version that ships the DOM Analyzer + URL-cache work.
-          skyrampMcpVersion: '0.2.0-rc.1'
+          skyrampMcpVersion: '0.2.0-rc.2'
 
           # Conservative limits for first runs; bump later if cost is fine.
           maxRecommendations: '10'
