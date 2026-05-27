@@ -56,7 +56,7 @@ jobs:
           targetReadyCheckTimeout: '180'
 
           # Pin the MCP version that ships the DOM Analyzer + URL-cache work.
-          skyrampMcpVersion: '0.2.0-rc.2'
+          skyrampMcpVersion: '0.2.0-rc.3'
 
           # Conservative limits for first runs; bump later if cost is fine.
           maxRecommendations: '10'
